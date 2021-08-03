@@ -1,24 +1,43 @@
-# README
+# Hukabori
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+日報の投稿と交流ができるSNSサイト
 
-Things you may want to cover:
+### サイトテーマ
+毎日の目標・進捗・改善を発信・共有できる社内SNSです。
+進捗・感じたこと・目標と写真を投稿することができ、いいね機能・コメント機能を使ってコミュニケーションを取ることができます。
+管理者権限で、添削・公開/非公開の制限をかけることができます。
 
-* Ruby version
 
-* System dependencies
+### テーマを選んだ理由
+私は前職で受注管理の仕事をしていました。
+お客様からの注文を受付して、適切な部署に情報を渡し次のアクションを指示する役目でした。
+各部署がどのような仕事をしていて、自分の行動がどのような影響を及ぼすのかが分かり面白いと感じていました。
+しかし、技術職の方々などは、自分の仕事に集中しており全体を見ることは難しいのではないかと感じていました。
+今回作成する社内SNSでは、それぞれが何を・どのように考えながら仕事しているかが伝わり、
+交流することで技術の交換・新しいアイデアの創出する契機になって欲しいという願いを込めて、テーマを決定しました。
 
-* Configuration
+### ターゲットユーザ
+ビジネスマン
 
-* Database creation
+### 主な利用シーン
+ユーザーは１日の終わりに、PCからサイトにログインします。投稿フォームから日報を作成・提出します。
+上司は内容を確認・添削を行い、indexへ公開します。
 
-* Database initialization
+## 設計書
+<...>
 
-* How to run the test suite
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1ZdgJ1UaOF5AeqCstcmVNuViqPtciMEXJk1CD6FIriA8/edit?usp=sharing
 
-* Services (job queues, cache servers, search engines, etc.)
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Deployment instructions
-
-* ...
+## 使用素材
+- 現状、無し。
+- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
+- 使用しない場合は、使用素材の項目をREADMEから削除してください。
