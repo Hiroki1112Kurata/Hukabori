@@ -2,19 +2,17 @@ Rails.application.routes.draw do
   root :to => "public/homes#top"
 
   scope module: :public do
-    devise_for :users, :controllers =>{
+    devise_for :users, :controllers => {
       :registrations => 'public/users/registrations',
-      :sessions => 'public/users/sessions'
+      :sessions => 'public/users/sessions',
     }
   end
 
   namespace :admin do
     root :to => "homes#top"
-    
   end
-  
-  devise_for :admin , controllers: {
-    sessions: 'admin/admins/sessions'
+
+  devise_for :admin, controllers: {
+    sessions: 'admin/admins/sessions',
   }
-  
 end
