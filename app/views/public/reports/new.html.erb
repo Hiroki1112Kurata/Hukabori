@@ -1,0 +1,15 @@
+<h1>新規投稿</h1>
+<%= form_with model: @report, local:true do |f| %>
+
+  <h4>題名</h4>
+  <%= f.text_field :title %>
+  <h4>画像</h4>
+   <%= f.attachment_field :image %>
+  <h4>作業内容・成果</h4>
+  <%= f.text_area :content %>
+  <h4>考えたこと・学んだこと</h4>
+  <%= f.text_area :learning %>
+  <h4>今後実施すること</h4>
+  <%= f.text_area :action %>
+  <%= f.submit '投稿する' %>
+<% end %>

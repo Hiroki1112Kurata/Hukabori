@@ -18,12 +18,16 @@
         <ul>
         <% if user_signed_in? %>
           <li>マイページ</li>
-          <li>新規投稿</li>
-          <li>投稿一覧</li>
+          <li>
+            <%= link_to "新規投稿", new_report_path %>
+          </li>
+          <li>
+            <%= link_to "投稿一覧", reports_path %>
+          </li>
           <li>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           </li>
-        
+
         <% elsif admin_signed_in? %>
           <li>投稿一覧</li>
           <li>社員一覧</li>
@@ -44,13 +48,13 @@
           </li>
           <li>
             <%= link_to "【要削除】管理者側ログイン", new_admin_session_path %>
-            
+
           </li>
         <% end %>
         </ul>
       </div>
     </header>
-    
+
     <%= yield %>
   </body>
 </html>
