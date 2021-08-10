@@ -1,8 +1,13 @@
 <h1>投稿一覧</h1>
 <% @reports.each do |report| %>
 <div>
-  <P>画像</P>
+  <!--<P>画像</P>-->
+  <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+<!--no imageの画像を差し込むこと-->
   <p><%= report.title %></p>
   <p><%= report.user.first_name %></p>
+  <dib>
+    <%= link_to "詳細へ", report_path(report.id) %>
+  </dib>
 </div>
 <% end %>
