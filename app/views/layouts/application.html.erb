@@ -10,6 +10,51 @@
   </head>
 
   <body>
+    <header>
+      <div>
+        <div>
+          <h2>ロゴ</h2>
+        </div>
+        <ul>
+        <% if user_signed_in? %>
+          <li>マイページ</li>
+          <li>
+            <%= link_to "新規投稿", new_report_path %>
+          </li>
+          <li>
+            <%= link_to "投稿一覧", reports_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+
+        <% elsif admin_signed_in? %>
+          <li>投稿一覧</li>
+          <li>社員一覧</li>
+          <li>部署一覧</li>
+          <li>分析する</li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>about</li>
+          <li>(使い方)</li>
+          <li>お問い合わせ</li>
+          <li>
+            <%= link_to "新規登録", new_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "【要削除】管理者側ログイン", new_admin_session_path %>
+
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </header>
+
     <%= yield %>
   </body>
 </html>
