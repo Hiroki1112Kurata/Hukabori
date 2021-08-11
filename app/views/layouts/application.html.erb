@@ -29,7 +29,9 @@
           </li>
 
         <% elsif admin_signed_in? %>
-          <li>投稿一覧</li>
+          <li>
+            <%= link_to "投稿一覧", admin_reports_path %>
+          </li>
           <li>社員一覧</li>
           <li>部署一覧</li>
           <li>分析する</li>

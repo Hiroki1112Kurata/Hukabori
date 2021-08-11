@@ -5,7 +5,7 @@
   <p><%= report.title %></p>
   <p><%= report.user.first_name %></p>
   <dib>
-    <%= link_to "詳細へ", report_path(report.id) %>
+    <%= link_to "詳細へ", admin_report_path(report.id) %>
   </dib>
 </div>
 <% end %>

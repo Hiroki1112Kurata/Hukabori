@@ -1,0 +1,12 @@
+<h1>投稿詳細</h1>
+<div>
+  <div><%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+
+  <p>タイトル：<%= @report.title %></p>
+  <p>名前：<%= @report.user.first_name %></p>
+  <p>作業内容・成果：<%= @report.content %></p>
+  <p>考えたこと・学んだこと：<%= @report.learning %></p>
+  <p>今後実施すること：<%= @report.action %></p>
+  <p>管理者コメント：<%= @report.admin_comment %></p>
+  <div><%= link_to "編集", edit_admin_report_path(@report.id) %></div>
+</div>
