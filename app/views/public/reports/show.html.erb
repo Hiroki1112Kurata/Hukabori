@@ -4,12 +4,12 @@
 
   <p>タイトル：<%= @report.title %></p>
   <p>名前：<%= @report.user.first_name %></p>
-  <% if @report.user == current_user %>
-    <%= link_to "編集", reports_path %>
-    <%= link_to "削除", reports_path %>
-  <% end %>
   <p>作業内容・成果：<%= @report.content %></p>
-  <p>考えたこと・学んだこと：<%= @report.content %></p>
+  <p>考えたこと・学んだこと：<%= @report.learning %></p>
   <p>今後実施すること：<%= @report.action %></p>
   <p>管理者コメント：<%= @report.admin_comment %></p>
+  <% if @report.user == current_user %>
+    <%= link_to "編集", edit_report_path(@report.id) %>
+    <%= link_to "削除", report_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
 </div>

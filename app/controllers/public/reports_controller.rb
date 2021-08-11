@@ -21,12 +21,19 @@ class Public::ReportsController < ApplicationController
   end
 
   def edit
+    @report = Report.find(params[:id])
   end
 
   def update
+    @report = Report.find(params[:id])
+    @report.update(report_params)
+    redirect_to report_path(@report.id)
   end
 
   def destroy
+    @report = Report.find(params[:id])
+    @report.destroy
+    redirect_to reports_path
   end
 
 
