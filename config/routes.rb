@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :reports, only: [:index, :show, :edit, :update]
+    resources :departments, only: [:create, :index, :edit, :update]
     root :to => "homes#top"
   end
 
