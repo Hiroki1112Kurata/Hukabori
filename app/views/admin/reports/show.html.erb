@@ -8,5 +8,14 @@
   <p>考えたこと・学んだこと：<%= @report.learning %></p>
   <p>今後実施すること：<%= @report.action %></p>
   <p>管理者コメント：<%= @report.admin_comment %></p>
+  <p>
+    <% if @report.status == 0 %>
+    未確認
+    <% elsif @report.status == 1 %>
+    閲覧可
+    <% else %>
+    非公開
+    <% end %>
+  </p>
   <div><%= link_to "編集", edit_admin_report_path(@report.id) %></div>
 </div>

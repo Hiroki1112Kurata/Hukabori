@@ -1,5 +1,5 @@
 <h1>投稿編集</h1>
-<%= form_with model:@report, local:true do |f| %>
+<%= form_with model: [:admin, @report], local:true do |f| %>
 <div>
   <div><%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
 
@@ -11,6 +11,10 @@
   <p>管理者コメント：<%= @report.admin_comment %></p>
   <h4>管理者コメント</h4>
   <%= f.text_area :admin_comment %>
+  <div>
+  <%= f.select :status ,options_for_select([['未確認', 0], ['閲覧可', 1], ['非公開', 2]], selected: @report.status) %>
+  </div>
+
   <%= f.submit "変更を保存" %>
 <% end %>
 </div>
