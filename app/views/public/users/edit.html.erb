@@ -1,0 +1,32 @@
+<h1>ユーザ情報編集</h1>
+<div>
+  <%= form_with model: @user, local:true do |f| %>
+  <table>
+    <tbody>
+      <tr>
+        <td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size: "60x60" %><br/   >画像を追加</td>
+        <td><%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %></td>
+      </tr>
+      <tr>
+        <td>性</td>
+        <td><%= f.text_field :last_name %></td>
+        <td>名</td>
+        <td><%= f.text_field :first_name %></td>
+      </tr>
+      <tr>
+        <td>セイ</td>
+        <td><%= f.text_field :last_name_kana %></td>
+        <td>メイ</td>
+        <td><%= f.text_field :first_name_kana %></td>
+      </tr>
+      <tr>
+        <td>部署</td>
+        <td><%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "選択して下さい" %></td>
+
+      </tr>
+    </tbody>
+  </table>
+  <%= f.submit "変更を保存" %>
+  <% end %>
+
+</div>

@@ -17,7 +17,11 @@
         </div>
         <ul>
         <% if user_signed_in? %>
+
           <li>マイページ</li>
+          <li>
+            <%= link_to "ホーム", user_path(current_user.id) %>
+          </li>
           <li>
             <%= link_to "新規投稿", new_report_path %>
           </li>
@@ -57,6 +61,13 @@
           </li>
         <% end %>
         </ul>
+        <div>
+        <% if user_signed_in? %>
+          <%= attachment_image_tag current_user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+          ようこそ<%= current_user.last_name + current_user.first_name%>さん
+        <% end %>
+        </div>
+
       </div>
     </header>
 

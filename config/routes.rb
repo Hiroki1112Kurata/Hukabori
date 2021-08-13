@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       :registrations => 'public/users/registrations',
       :sessions => 'public/users/sessions'
     }
+    resources :users, only: [:show, :edit, :update]
   end
 
   namespace :admin do
