@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :reports do
+      resource :favorites, only: [:create, :destroy]
       resources:report_comments, only: [:create, :destroy]
     end
     devise_for :users, :controllers => {
