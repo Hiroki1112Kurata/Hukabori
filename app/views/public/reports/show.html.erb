@@ -13,3 +13,20 @@
     <%= link_to "削除", report_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>
+
+<div>
+  <p>コメント件数：<%= @report.report_comments.count %></p>
+  <% @report.report_comments.each do |report_comment| %>
+    <div>
+     <%= report_comment.user.last_name %>
+     <%= report_comment.comment %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with(model:[@report, @report_comment],local: true) do |f| %>
+  <%= f.text_field :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信"%>
+  <% end %>
+</div>

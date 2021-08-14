@@ -18,6 +18,7 @@ class Public::ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @report_comment = ReportComment.new
   end
 
   def edit

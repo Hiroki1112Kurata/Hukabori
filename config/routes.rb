@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root :to => "public/homes#top"
 
   scope module: :public do
-    resources :reports
+    resources :reports do
+      resources:report_comments, only: [:create, :destroy]
+    end
     devise_for :users, :controllers => {
       :registrations => 'public/users/registrations',
       :sessions => 'public/users/sessions'
