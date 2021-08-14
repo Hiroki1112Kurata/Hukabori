@@ -9,6 +9,8 @@ class Public::ReportCommentsController < ApplicationController
   end
 
   def destroy
+    ReportComment.find_by(id: params[:id], report_id: params[:report_id]).destroy
+    redirect_to report_path(params[:report_id])
   end
 
 

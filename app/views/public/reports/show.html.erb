@@ -20,6 +20,11 @@
     <div>
      <%= report_comment.user.last_name %>
      <%= report_comment.comment %>
+     <% if report_comment.user == current_user %>
+       <div>
+         <%= link_to "削除", report_report_comment_path(report_comment.report, report_comment), method: :delete %>
+       </div>
+  　 <% end %>
     </div>
   <% end %>
 </div>
