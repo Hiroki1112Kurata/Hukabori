@@ -1,0 +1,13 @@
+<div>
+  <h1>検索結果</h1>
+  <% @datas.each do |report| %>
+  <div>
+    <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+    <p><%= report.title %></p>
+    <p><%= report.user.first_name %></p>
+    <div>
+      <%= link_to "詳細へ", report_path(report.id) %>
+    </div>
+  </div>
+  <% end %>
+</div>

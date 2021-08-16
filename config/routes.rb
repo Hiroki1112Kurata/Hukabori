@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  namespace :public do
+  end
   root :to => "public/homes#top"
 
   scope module: :public do
+    get 'searches/search'
     resources :reports do
       resource :favorites, only: [:create, :destroy]
       resources:report_comments, only: [:create, :destroy]

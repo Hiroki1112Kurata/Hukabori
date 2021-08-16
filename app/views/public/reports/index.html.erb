@@ -4,8 +4,8 @@
   <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
   <p><%= report.title %></p>
   <p><%= report.user.first_name %></p>
-  <dib>
+  <div>
     <%= link_to "詳細へ", report_path(report.id) %>
-  </dib>
+  </div>
 </div>
 <% end %>
