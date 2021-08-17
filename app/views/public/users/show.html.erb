@@ -2,6 +2,9 @@
   <div><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
   <p><%= @user.first_name + @user.last_name %></p>
   <p><%= @user.department.name %></p>
+  <%= link_to reports_bookmark_path(@user.id) do %>
+    <p>ブックマーク一覧へ</p>
+  <% end %>
   <% if @user == current_user %>
   <div><%= link_to "編集", edit_user_path(@user.id) %></div>
   <% end %>

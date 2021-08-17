@@ -12,6 +12,8 @@
     <%= link_to "編集", edit_report_path(@report.id) %>
     <%= link_to "削除", report_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
+
+
   <% if @report.favorited_by?(current_user) %>
   <p>
     <%= link_to report_favorites_path(@report), method: :delete do %>
@@ -25,7 +27,23 @@
     <% end %>
   </p>
   <% end %>
+
+
+  <% if @report.bookmarked_by?(current_user) %>
+  <p>
+    <%= link_to report_bookmark_path(@report), method: :delete do %>
+      ブックマーク削除
+    <% end %>
+  </p>
+  <% else %>
+  <p>
+    <%= link_to report_bookmarks_path(@report), method: :post do %>
+      ブックマーク
+    <% end %>
+  </p>
+  <% end %>
 </div>
+
 
 <div>
   <p>コメント件数：<%= @report.report_comments.count %></p>
