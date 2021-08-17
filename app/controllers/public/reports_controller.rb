@@ -37,6 +37,10 @@ class Public::ReportsController < ApplicationController
     redirect_to reports_path
   end
 
+  def bookmark
+    @bookmarks = Bookmark.where(user_id: current_user.id)
+  end
+
 
   private
 

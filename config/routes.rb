@@ -5,8 +5,10 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get 'searches/search'
+    get "reports/bookmark" =>"reports#bookmark"
     resources :reports do
       resource :favorites, only: [:create, :destroy]
+      resources :bookmarks, only: [:create, :destroy]
       resources:report_comments, only: [:create, :destroy]
     end
     devise_for :users, :controllers => {

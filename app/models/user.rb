@@ -9,4 +9,5 @@ class User < ApplicationRecord
   belongs_to :department
   has_many :report_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 end
