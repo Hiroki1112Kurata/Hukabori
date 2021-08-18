@@ -2,10 +2,17 @@
 <% @reports.each do |report| %>
 <div>
   <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
-  <p><%= report.title %></p>
-  <p><%= report.user.first_name %></p>
+  <h4><%= report.title %></h4>
+  <div>
+    <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+    <%= report.user.last_name %>
+    <%= report.user.first_name %>
+  </div>
   <div>
     <%= link_to "詳細へ", report_path(report.id) %>
+  </div>
+  <div>
+    #############################################################
   </div>
 </div>
 <% end %>

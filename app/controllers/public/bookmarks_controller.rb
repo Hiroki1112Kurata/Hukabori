@@ -3,7 +3,7 @@ class Public::BookmarksController < ApplicationController
   def create
     report = Report.find(params[:report_id])
     bookmark = current_user.bookmarks.new(report_id: report.id)
-    bookmark.save!
+    bookmark.save
     redirect_to report_path(report)
   end
 
@@ -15,8 +15,6 @@ class Public::BookmarksController < ApplicationController
   end
 
   def index
-    # @user = User.find(params[:id])
-    # @bookmarks = Bookmark.where(user_id: @user.id)
     @bookmarks = Bookmark.where(user_id: current_user.id)
   end
 

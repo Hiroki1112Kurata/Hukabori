@@ -1,7 +1,7 @@
 # Hukabori
 
 ## サイト概要
-日報の投稿と交流ができるSNSサイト
+日報の投稿と交流ができるSNSサイトです。
 
 ### サイトテーマ
 毎日の目標・進捗・改善を発信・共有できる社内SNSです。
@@ -25,7 +25,14 @@
 上司は内容を確認・添削を行い、indexへ公開します。
 
 ## 設計書
-<...>
+- ER図
+https://drive.google.com/file/d/1GRe_E7L80pRgPIFoTmFZ19ytqVUBW2ok/view?usp=sharing
+
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1ejdfQFrGkM5t0QWAznfsoybVFB74RmJlfbu90E0q0ZE/edit?usp=sharing
+
+- アプリケーション詳細設計
+https://docs.google.com/spreadsheets/d/1t2YntOXU2R6vYJ1IX7t1-wy-sfKWzS2nSJf3-VN8K1U/edit?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1ZdgJ1UaOF5AeqCstcmVNuViqPtciMEXJk1CD6FIriA8/edit?usp=sharing
@@ -38,6 +45,5 @@ https://docs.google.com/spreadsheets/d/1ZdgJ1UaOF5AeqCstcmVNuViqPtciMEXJk1CD6FIr
 - IDE：Cloud9
 
 ## 使用素材
-- 現状、無し。
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- ロゴ
+https://hatchful.shopify.com/ja/
