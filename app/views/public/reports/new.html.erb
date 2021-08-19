@@ -11,5 +11,11 @@
   <%= f.text_area :learning %>
   <h4>今後実施すること</h4>
   <%= f.text_area :action %>
+  <h4>タグ</h4>
+  <%= f.text_field :name %>
+  <p>
+    スペースを入力することで複数のタグを付けることができます。<br/>
+    例：音楽 文芸 スポーツ
+  </p>
   <%= f.submit '投稿する' %>
 <% end %>

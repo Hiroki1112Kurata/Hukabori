@@ -1,18 +1,7 @@
-<h1>投稿一覧</h1>
-<% @reports.each do |report| %>
-<div>
-  <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
-  <h4><%= report.title %></h4>
-  <div>
-    <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
-    <%= report.user.last_name %>
-    <%= report.user.first_name %>
-  </div>
-  <div>
-    <%= link_to "詳細へ", report_path(report.id) %>
-  </div>
-  <div>
-    #############################################################
+<div class="container">
+  <h2>投稿一覧</h2>
+
+  <div class="row">
+    <%= render 'public/reports/index', reports: @reports %>
   </div>
 </div>
-<% end %>

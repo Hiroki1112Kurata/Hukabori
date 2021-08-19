@@ -7,17 +7,21 @@ class Public::ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.user_id = current_user.id
+    tag_list = params[:report][:name].split(nil)
     @report.admin_comment = "未確認"
     @report.save
-    redirect_to reports_path
+    @report.save_tag(tag_list)
+    redirect_to report_path(@report)
   end
 
   def index
     @reports = Report.all
+    @tag_list = Tag.all
   end
 
   def show
     @report = Report.find(params[:id])
+    @report_tag = @report.tags
     @report_comment = ReportComment.new
   end
 
@@ -41,6 +45,10 @@ class Public::ReportsController < ApplicationController
     @bookmarks = Bookmark.where(user_id: current_user.id)
   end
 
+  def searchpage
+    @tag_list = Tag.all
+  end
+  
 
   private
 

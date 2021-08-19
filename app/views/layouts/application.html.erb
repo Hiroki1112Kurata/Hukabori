@@ -8,78 +8,11 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <header>
-      <div>
-        <div>
-          <%= link_to root_path do %>
-            <%= image_tag('Hukabori_logo.jpg', size: "100x100")%>
-          <% end %>
-        </div>
-        <ul>
-        <% if user_signed_in? %>
-
-          <li>
-            <%= link_to "ホーム", user_path(current_user.id) %>
-          </li>
-          <li>
-            <%= link_to "新規投稿", new_report_path %>
-          </li>
-          <li>
-            <%= link_to "投稿一覧", reports_path %>
-          </li>
-          <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
-
-        <% elsif admin_signed_in? %>
-          <li>
-            <%= link_to "投稿一覧", admin_root_path %>
-          </li>
-          <li>
-            <%= link_to "社員一覧", admin_users_path %>
-          </li>
-          <li>
-            <%= link_to "部署一覧", admin_departments_path %>
-          </li>
-          <li>分析する</li>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li>about</li>
-          <li>(使い方)</li>
-          <li>お問い合わせ</li>
-          <li>
-            <%= link_to "新規登録", new_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_user_session_path %>
-          </li>
-          <li>
-            <%= link_to "【要削除】管理者側ログイン", new_admin_session_path %>
-          </li>
-        <% end %>
-        </ul>
-        <div>
-        <% if user_signed_in? %>
-          <%= attachment_image_tag current_user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
-          ようこそ<%= current_user.last_name + current_user.first_name%>さん
-        <% end %>
-        </div>
-        <div>
-        <% if user_signed_in? %>
-          <%= form_with url:searches_search_path, method: :get, local:true do |f| %>
-          <%= f.text_field 'search[value]'%>
-          <%= f.submit :"検索" %>
-          <% end %>
-        <% end %>
-        </div>
-
-      </div>
-    </header>
-
-    <%= yield %>
+    <%= render 'layouts/header' %>
+      <main>
+        <%= yield %>
+      </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

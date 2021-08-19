@@ -4,13 +4,16 @@ Rails.application.routes.draw do
   root :to => "public/homes#top"
 
   scope module: :public do
-    get 'searches/search'
+    get "searches/search"
+
     get "reports/bookmark" =>"reports#bookmark"
+    get "reports/searchpage" =>"reports#searchpage"
     resources :reports do
       resource :favorites, only: [:create, :destroy]
       resources :bookmarks, only: [:create, :destroy]
       resources:report_comments, only: [:create, :destroy]
     end
+
     devise_for :users, :controllers => {
       :registrations => 'public/users/registrations',
       :sessions => 'public/users/sessions'

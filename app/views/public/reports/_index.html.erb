@@ -1,0 +1,21 @@
+<!--render 'public/reports/index', reports: @???-->
+
+<% reports.each do |report| %>
+<div class="col-sm-5 border ml-1 mt-1">
+  <div><%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+  <h4><%= report.title %></h4>
+  <div>
+    <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+    <%= report.user.last_name %>
+    <%= report.user.first_name %>
+
+    <% report.tags.each do |tag_list| %>
+      <%= tag_list.name %>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to "詳細へ", report_path(report.id) %>
+  </div>
+
+</div>
+<% end %>
