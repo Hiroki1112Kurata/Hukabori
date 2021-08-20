@@ -63,6 +63,7 @@
             <% end %>
           </li>
 
+
         <% elsif admin_signed_in? %>
           <li class="btn btn-default border ml-4">
             <%= link_to "投稿一覧", admin_root_path, class: 'btn btn-default nav-link text-dark' %>
@@ -79,6 +80,7 @@
           <li class="btn btn-default border ml-4">
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-default nav-link text-dark' %>
           </li>
+
 
         <% else %>
           <li class="btn btn-default border ml-4">
