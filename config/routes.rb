@@ -8,9 +8,10 @@ Rails.application.routes.draw do
 
     get "reports/bookmark" =>"reports#bookmark"
     get "reports/searchpage" =>"reports#searchpage"
+    get "reports/rank" =>"reports#rank"
     resources :reports do
       resource :favorites, only: [:create, :destroy]
-      resources :bookmarks, only: [:create, :destroy]
+      resource :bookmarks, only: [:create, :destroy]
       resources:report_comments, only: [:create, :destroy]
     end
 

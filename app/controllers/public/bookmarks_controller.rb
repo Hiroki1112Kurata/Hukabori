@@ -14,8 +14,4 @@ class Public::BookmarksController < ApplicationController
     redirect_to report_path(report)
   end
 
-  def index
-    @bookmarks = Bookmark.where(user_id: current_user.id)
-  end
-
 end

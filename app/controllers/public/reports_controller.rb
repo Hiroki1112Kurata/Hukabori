@@ -42,13 +42,19 @@ class Public::ReportsController < ApplicationController
   end
 
   def bookmark
-    @bookmarks = Bookmark.where(user_id: current_user.id)
+    @reports = Bookmark.where(user_id: current_user.id)
   end
 
   def searchpage
     @tag_list = Tag.all
   end
-  
+
+  def rank
+    @today_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_day).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @week_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_week).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @month_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_month).order('count(report_id) desc').limit(6).pluck(:report_id))
+  end
+
 
   private
 

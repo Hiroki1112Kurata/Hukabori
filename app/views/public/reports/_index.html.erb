@@ -8,11 +8,25 @@
     <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
     <%= report.user.last_name %>
     <%= report.user.first_name %>
-
     <% report.tags.each do |tag_list| %>
       <%= tag_list.name %>
     <% end %>
   </div>
+
+  <div id="favorites_buttons_<%= report.id %>">
+    <%= render 'public/favorites/favorite', report: report %>
+  </div>
+
+  <% if report.bookmarked_by?(current_user) %>
+    <%= link_to report_bookmarks_path(report), method: :delete do %>
+      <i class="fas fa-bookmark"></i><%= report.bookmarks.count %>
+    <% end %>
+  <% else %>
+    <%= link_to report_bookmarks_path(report), method: :post do %>
+      <i class="far fa-bookmark"></i><%= report.bookmarks.count %>
+    <% end %>
+  <% end %>
+
   <div>
     <%= link_to "詳細へ", report_path(report.id) %>
   </div>

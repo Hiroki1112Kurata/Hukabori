@@ -8,47 +8,44 @@
   <p>考えたこと・学んだこと：<%= @report.learning %></p>
   <p>今後実施すること：<%= @report.action %></p>
   <p>管理者コメント：<%= @report.admin_comment %></p>
-  
-  
+
+
   <% if @report.user == current_user %>
-    <%= link_to "編集", edit_report_path(@report.id) %>
-    <%= link_to "削除", report_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <%= link_to edit_report_path(@report.id) do %>
+      <i class="fas fa-cog"></i>
+    <% end %>
+    <%= link_to report_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
   <% end %>
 
 
   <% if @report.favorited_by?(current_user) %>
-  <p>
-    <%= link_to report_favorites_path(@report), method: :delete do %>
-      ♥<%= @report.favorites.count %> いいね
-    <% end %>
-  </p>
+      <%= link_to report_favorites_path(@report), method: :delete do %>
+        <i class="fas fa-heart heart-red"></i><%= @report.favorites.count %>
+      <% end %>
   <% else %>
-  <p>
-    <%= link_to report_favorites_path(@report), method: :post do %>
-      ♡<%= @report.favorites.count %> いいね
-    <% end %>
-  </p>
+      <%= link_to report_favorites_path(@report), method: :post do %>
+        <i class="far fa-heart heart-blue"></i><%= @report.favorites.count %>
+      <% end %>
   <% end %>
 
 
   <% if @report.bookmarked_by?(current_user) %>
-  <p>
-    <%= link_to report_bookmark_path(@report), method: :delete do %>
-      ブックマーク削除
+    <%= link_to report_bookmarks_path(@report), method: :delete do %>
+      <i class="fas fa-bookmark"></i><%= @report.bookmarks.count %>
     <% end %>
-  </p>
   <% else %>
-  <p>
     <%= link_to report_bookmarks_path(@report), method: :post do %>
-      ブックマーク
+      <i class="far fa-bookmark"></i><%= @report.bookmarks.count %>
     <% end %>
-  </p>
   <% end %>
+
+  <i class="far fa-comment"></i><%= @report.report_comments.count %>
 </div>
 
 
 <div>
-  <p>コメント件数：<%= @report.report_comments.count %></p>
   <% @report.report_comments.each do |report_comment| %>
     <div>
      <%= report_comment.user.last_name %>
