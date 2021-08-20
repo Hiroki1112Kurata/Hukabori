@@ -20,15 +20,10 @@
   <% end %>
 
 
-  <% if @report.favorited_by?(current_user) %>
-      <%= link_to report_favorites_path(@report), method: :delete do %>
-        <i class="fas fa-heart heart-red"></i><%= @report.favorites.count %>
-      <% end %>
-  <% else %>
-      <%= link_to report_favorites_path(@report), method: :post do %>
-        <i class="far fa-heart heart-blue"></i><%= @report.favorites.count %>
-      <% end %>
-  <% end %>
+
+  <div id="favorites_buttons_<%= @report.id %>">
+    <%= render 'public/favorites/favorite', report: @report %>
+  </div>
 
 
   <% if @report.bookmarked_by?(current_user) %>
