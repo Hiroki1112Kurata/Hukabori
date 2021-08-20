@@ -33,22 +33,34 @@
 
         <% if user_signed_in? %>
           <li class="btn btn-default border ml-4">
-            <%= link_to "ホーム", user_path(current_user.id), class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to user_path(current_user.id), class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-home mr-1"></i>ホーム
+            <% end %>
           </li>
           <li class="btn btn-default border ml-4">
-            <%= link_to "検索", reports_searchpage_path, class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to reports_searchpage_path, class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-search mr-1"></i> 検索
+            <% end %>
           </li>
           <li class="btn btn-default border ml-4">
-            <%= link_to "新規投稿", new_report_path, class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to new_report_path, class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-pen mr-1"></i>新規投稿
+            <% end %>
           </li>
           <li class="btn btn-default border ml-4">
-            <%= link_to "投稿一覧", reports_path, class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to reports_path, class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-book-open mr-1"></i>投稿一覧
+            <% end %>
           </li>
           <li class="btn btn-default border ml-4">
-            <%= link_to "ランキング", reports_rank_path, class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to reports_rank_path, class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-signal mr-1"></i>ランキング
+            <% end %>
           </li>
           <li class="btn btn-default border ml-4">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-default nav-link text-dark' %>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-default nav-link text-dark' do %>
+              <i class="fas fa-sign-out-alt mr-1"></i>ログアウト
+            <% end %>
           </li>
 
         <% elsif admin_signed_in? %>

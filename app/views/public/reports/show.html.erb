@@ -1,6 +1,6 @@
 <h1>投稿詳細</h1>
 <div>
-  <div><%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+  <%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
 
   <p>タイトル：<%= @report.title %></p>
   <p>名前：<%= @report.user.first_name %></p>
@@ -9,34 +9,27 @@
   <p>今後実施すること：<%= @report.action %></p>
   <p>管理者コメント：<%= @report.admin_comment %></p>
 
-
-  <% if @report.user == current_user %>
-    <%= link_to edit_report_path(@report.id) do %>
-      <i class="fas fa-cog"></i>
+  <div class="d-flex flex-row mb-3">
+    <% if @report.user == current_user %>
+      <%= link_to edit_report_path(@report.id) do %>
+        <i class="fas fa-cog"></i>
+      <% end %>
+      <%= link_to report_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
     <% end %>
-    <%= link_to report_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-      <i class="far fa-trash-alt"></i>
-    <% end %>
-  <% end %>
 
 
+    <div id="favorites_buttons_<%= @report.id %>">
+      <%= render 'public/favorites/favorite', report: @report %>
+    </div>
 
-  <div id="favorites_buttons_<%= @report.id %>">
-    <%= render 'public/favorites/favorite', report: @report %>
+    <div id="bookmarks_buttons_<%= @report.id %>">
+      <%= render 'public/bookmarks/bookmark', report: @report %>
+    </div>
+
+    <i class="far fa-comment"></i><%= @report.report_comments.count %>
   </div>
-
-
-  <% if @report.bookmarked_by?(current_user) %>
-    <%= link_to report_bookmarks_path(@report), method: :delete do %>
-      <i class="fas fa-bookmark"></i><%= @report.bookmarks.count %>
-    <% end %>
-  <% else %>
-    <%= link_to report_bookmarks_path(@report), method: :post do %>
-      <i class="far fa-bookmark"></i><%= @report.bookmarks.count %>
-    <% end %>
-  <% end %>
-
-  <i class="far fa-comment"></i><%= @report.report_comments.count %>
 </div>
 
 
