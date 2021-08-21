@@ -14,3 +14,30 @@
  *= require_self
  */
 @import "bootstrap";
+
+.row {
+  margin-top:10px;
+}
+
+td {
+  padding-right: 10px;
+}
+
+.heart-red {
+  color:red;
+}
+
+.heart-blue {
+  color:black;
+}
+
+.img {
+
+  .image {
+    height:100px;
+  }
+}
+
+.flex-item {
+  width:300px;
+}

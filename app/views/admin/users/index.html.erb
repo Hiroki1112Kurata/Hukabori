@@ -1,12 +1,13 @@
 <h1>社員一覧</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>ID</th>
       <th>画像</th>
       <th>氏名</th>
       <th>部署</th>
+      <th>メールアドレス</th>
       <th>ステータス</th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
     　<% end %>
       </td>
       <td><%= user.department.name %></td>
+      <td><%= user.email %></td>
       <td>
         <% if user.is_deleted == false %>
           有効

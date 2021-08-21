@@ -1,0 +1,17 @@
+<div class="container">
+
+  <h2>日間ランキング</h2>
+  <div class="row">
+    <%= render 'public/reports/index', reports: @today_ranks %>
+  </div>
+
+  <h2>週間ランキング</h2>
+  <div class="row">
+    <%= render 'public/reports/index', reports: @week_ranks %>
+  </div>
+
+  <h2>月間ランキング</h2>
+  <div class="row">
+    <%= render 'public/reports/index', reports: @month_ranks %>
+  </div>
+</div>

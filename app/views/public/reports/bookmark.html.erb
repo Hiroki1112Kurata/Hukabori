@@ -1,5 +1,6 @@
 <h1>ブックマーク一覧</h1>
-<% @bookmarks.each do |bookmark| %>
+
+<% @reports.each do |bookmark| %>
 <div>
   <div><%= attachment_image_tag bookmark.report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
   <p><%= bookmark.report.title %></p>
@@ -7,6 +8,7 @@
   <div>
     <%= link_to "詳細へ", report_path(bookmark.report.id) %>
   </div>
-
 </div>
 <% end %>
+<p>########################</p>
+
