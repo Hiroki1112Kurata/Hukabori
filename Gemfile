@@ -73,3 +73,6 @@ end
 
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
+gem "dotenv-rails"
+gem 'rails-i18n'
+gem 'enum_help'
