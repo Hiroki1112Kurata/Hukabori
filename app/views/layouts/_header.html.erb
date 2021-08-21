@@ -84,13 +84,10 @@
 
         <% else %>
           <li class="btn btn-default border ml-4">
-            about
+            <%= link_to "about", about_path, class: 'btn btn-default nav-link text-dark' %>
           </li>
           <li class="btn btn-default border ml-4">
-            (使い方)
-          </li>
-          <li class="btn btn-default border ml-4">
-            お問い合わせ
+            <%= link_to "お問い合わせ", new_contact_path, class: 'btn btn-default nav-link text-dark' %>
           </li>
           <li class="btn btn-default border ml-4">
             <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-default nav-link text-dark' %>
