@@ -12,7 +12,7 @@
   <h4>管理者コメント</h4>
   <%= f.text_area :admin_comment %>
   <div>
-  <%= f.select :status ,options_for_select([['未確認', 0], ['閲覧可', 1], ['非公開', 2]], selected: @report.status) %>
+    <%= f.select :status ,options_for_select([['未確認', :checking], ['閲覧可', :publiced], ['非公開', :privated]], selected: @report.status) %>
   </div>
 
   <%= f.submit "変更を保存" %>

@@ -2,7 +2,12 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reports = @user.reports.all
+    if @user.id == current_user.id
+      @reports = @user.reports.all.order(created_at: :desc)
+    else
+      @reports = @user.reports.publiced.order(created_at: :desc)
+    end
+
   end
 
   def edit

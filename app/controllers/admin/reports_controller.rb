@@ -1,13 +1,5 @@
 class Admin::ReportsController < ApplicationController
 
-  def index
-    @reports = Report.all
-  end
-
-  def show
-    @report = Report.find(params[:id])
-  end
-
   def edit
     @report = Report.find(params[:id])
   end
@@ -15,7 +7,7 @@ class Admin::ReportsController < ApplicationController
   def update
     @report = Report.find(params[:id])
     @report.update(report_params)
-    redirect_to admin_report_path(@report.id)
+    redirect_to admin_root_path
   end
 
 

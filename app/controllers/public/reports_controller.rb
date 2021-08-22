@@ -15,7 +15,7 @@ class Public::ReportsController < ApplicationController
   end
 
   def index
-    @reports = Report.all
+    @reports = Report.publiced.order(created_at: :desc)
     @tag_list = Tag.all
   end
 

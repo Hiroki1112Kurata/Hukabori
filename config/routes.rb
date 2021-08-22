@@ -30,8 +30,9 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
   end
 
+
   namespace :admin do
-    resources :reports, only: [:index, :show, :edit, :update]
+    resources :reports, only: [:edit, :update]
     resources :departments, only: [:create, :index, :edit, :update]
     resources :users, only: [:index, :edit, :update]
     root :to => "homes#top"

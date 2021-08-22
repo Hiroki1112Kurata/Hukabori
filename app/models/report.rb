@@ -8,6 +8,8 @@ class Report < ApplicationRecord
   has_many :tags, through: :tag_relationships
   attachment :image
 
+  enum status: { checking: 0, publiced: 1, privated: 2 }
+
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?

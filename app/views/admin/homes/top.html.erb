@@ -1,27 +1,44 @@
-<h1>管理者側トップ画面です</h1>
-<h1>投稿一覧</h1>
-<table>
-  <thead>
-    <tr></tr>
-  </thead>
-  <tbody>
-<% @reports.each do |report| %>
-    <tr>
-      <td>
-        <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
-        <%= report.user.last_name + report.user.first_name %><br/>
-        <%= report.title %>
-      </td>
-      <td>
-        <%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-      </td>
-      <td>
-        <%= %>
-      </td>
-      <td>
-        <%= link_to "詳細へ", admin_report_path(report.id) %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<div class="container">
+  <h1>投稿一覧</h1>
+  <div class="row">
+    <div class="col-sm-11">
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody>
+        <% @reports.each do |report| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+              <%= report.user.last_name + report.user.first_name %><br/>
+              <%= report.title %>
+            </td>
+            <td>
+              <%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+            </td>
+            <td>
+              <% if report.status == "checking" %>
+                <div class="border p-2" style="background-color: #e3f2fd;">
+                  未確認
+                </div>
+              <% elsif report.status == "publiced" %>
+                <div class="border p-2">
+                  閲覧可
+                </div>
+              <% else %>
+                <div class="border p-2">
+                  非公開
+                </div>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "編集", edit_admin_report_path(report.id) %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
