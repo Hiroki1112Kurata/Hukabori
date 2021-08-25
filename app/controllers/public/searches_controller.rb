@@ -15,12 +15,12 @@ class Public::SearchesController < ApplicationController
   private
 
   def search1_for(value, report)
-    report.publiced.where("title LIKE ?", "%#{value}%")
+    Kaminari.paginate_array(report.publiced.where("title LIKE ?", "%#{value}%")).page(params[:page]).per(6)
     # 部分一致　検索
   end
 
   def search2_for(value)
-    Report.publiced.where("title LIKE ?", "%#{value}%")
+    Kaminari.paginate_array(Report.publiced.where("title LIKE ?", "%#{value}%")).page(params[:page]).per(6)
     # 部分一致　検索
   end
 end
