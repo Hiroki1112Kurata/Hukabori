@@ -2,10 +2,10 @@
 
 <% if report.bookmarked_by?(current_user) %>
   <%= link_to report_bookmarks_path(report), method: :delete, remote: true do %>
-    <p class="mr-1 text-dark"><i class="fas fa-bookmark"></i><%= report.bookmarks.count %></p>
+    <p class="mr-1 mb-0 text-dark"><i class="fas fa-bookmark"></i><%= report.bookmarks.count %></p>
   <% end %>
 <% else %>
   <%= link_to report_bookmarks_path(report), method: :post, remote: true do %>
-    <p class="mr-1 text-dark"><i class="far fa-bookmark"></i><%= report.bookmarks.count %></p>
+    <p class="mr-1 mb-0 text-dark"><i class="far fa-bookmark"></i><%= report.bookmarks.count %></p>
   <% end %>
 <% end %>

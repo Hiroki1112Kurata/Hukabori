@@ -6,6 +6,10 @@ class Report < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :tag_relationships, dependent: :destroy
   has_many :tags, through: :tag_relationships
+
+  attr_accessor :name
+  # tagテーブルのnameカラムを紐づける
+  
   attachment :image
 
   enum status: { checking: 0, publiced: 1, privated: 2 }

@@ -1,53 +1,135 @@
-<h1>投稿詳細</h1>
-<div>
-  <%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-
-  <p>タイトル：<%= @report.title %></p>
-  <p>名前：<%= @report.user.first_name %></p>
-  <p>作業内容・成果：<%= @report.content %></p>
-  <p>考えたこと・学んだこと：<%= @report.learning %></p>
-  <p>今後実施すること：<%= @report.action %></p>
-  <p>管理者コメント：<%= @report.admin_comment %></p>
-
-  <div class="d-flex flex-row mb-3">
-    <% if @report.user == current_user %>
-      <%= link_to edit_report_path(@report.id) do %>
-        <i class="fas fa-cog"></i>
-      <% end %>
-      <%= link_to report_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-        <i class="far fa-trash-alt"></i>
-      <% end %>
-    <% end %>
-
-
-    <div id="favorites_buttons_<%= @report.id %>">
-      <%= render 'public/favorites/favorite', report: @report %>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h2>投稿詳細</h2>
     </div>
 
-    <div id="bookmarks_buttons_<%= @report.id %>">
-      <%= render 'public/bookmarks/bookmark', report: @report %>
+    <div class="col-sm-12 show-img">
+      <%= attachment_image_tag @report, :image, format: 'jpeg', fallback: "no_image.jpg" %>
     </div>
-
-    <i class="far fa-comment"></i><%= @report.report_comments.count %>
   </div>
-</div>
 
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2 text-break">
+      <h2><%= @report.title %></h2>
+      <div class="row justify-content-between">
 
-<div>
-  <% @report.report_comments.each do |report_comment| %>
-    <div>
-     <%= report_comment.user.last_name %>
-     <%= report_comment.comment %>
-     <% if report_comment.user == current_user %>
-       <%= link_to "削除", report_report_comment_path(report_comment.report, report_comment), method: :delete %>
-  　 <% end %>
+        <div class="flex d-flex flex-row mb-1">
+          <i class="fas fa-tags"></i>
+            <% @report.tags.each do |tag_list| %>
+              <div id="tag_lists_<%= tag_list.id %>" class="mr-1 border" style="background-color: #e3f2fd;">
+                <%= tag_list.name %>
+              </div>
+            <% end %>
+
+            <% if @report.status == "checking" %>
+              <div class="border" style="background-color: #e3f2fd;">
+                <i class="fas fa-spinner"></i>未確認
+              </div>
+            <% elsif @report.status == "publiced" %>
+              <div></div>
+            <% else %>
+              <div class="border" style="background-color: #e3f2fd;">
+                <i class="far fa-eye-slash"></i>非公開
+              </div>
+            <% end %>
+        </div>
+
+        <div class="flex d-flex flex-row justify-content-end">
+          <div id="favorites_buttons_<%= @report.id %>">
+            <%= render 'public/favorites/favorite', report: @report %>
+          </div>
+
+          <div id="bookmarks_buttons_<%= @report.id %>">
+            <%= render 'public/bookmarks/bookmark', report: @report %>
+          </div>
+          <p class="mb-0">
+          <i class="far fa-comment"></i><%= @report.report_comments.count %>
+
+          </p>
+        </div>
+      </div>
+        <div class="flex">
+          <%= attachment_image_tag @report.user, :profile_image, :fill, 30, 30, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "30x30", style: "border-radius:50%" %>
+          <%= @report.user.last_name %>
+          <%= @report.user.first_name %>
+        </div>
+
+        <div class="row border-bottom">
+          <h4>作業内容・成果</h4>
+        </div>
+          <%= simple_format(h(@report.content)) %>
+        <div class="row border-bottom">
+          <h4>考えたこと・学んだこと</h4>
+        </div>
+        <p><%= simple_format(h(@report.learning)) %></p>
+        <div class="row border-bottom">
+          <h4>今後実施すること</h4>
+        </div>
+        <p><%= simple_format(h(@report.action)) %></p>
+
+        <% if @report.user == current_user %>
+          <div class="row border-bottom">
+            <h4>管理者コメント</h4>
+          </div>
+          <p><%= simple_format(h(@report.admin_comment)) %></p>
+        <% else %>
+        <% end %>
+
     </div>
-  <% end %>
-</div>
+  </div>
 
-<div>
-  <%= form_with(model:[@report, @report_comment],local: true) do |f| %>
-  <%= f.text_field :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信"%>
-  <% end %>
+    <div class="d-flex flex-wrap justify-content-center">
+      <% if @report.user == current_user %>
+        <%= link_to edit_report_path(@report.id) do %>
+          <div class="btn btn-success btn-lg m-3">
+            <i class="fas fa-cog"></i>編集
+          </div>
+        <% end %>
+        <%= link_to report_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+          <div class="btn btn-danger btn-lg m-3">
+            <i class="far fa-trash-alt"></i>削除
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="form-group">
+        <%= form_with(model:[@report, @report_comment],local: true) do |f| %>
+          <%= f.text_field :comment, placeholder: "コメントをここに", autofocus: true, class: 'form-control' %>
+          <div class="text-right">
+            <%= f.submit "送信" ,class: 'btn btn-success col-sm-2'%>
+          </div>
+        <% end %>
+      </div>
+
+
+      <div>
+        <table class="table">
+          <tbody>
+            <% @report.report_comments.each do |report_comment| %>
+            <tr>
+              <td class="text-break">
+               <%= attachment_image_tag report_comment.user, :profile_image, :fill, 30, 30, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "30x30", style: "border-radius:50%" %>
+               <%= report_comment.user.last_name %>
+               <%= report_comment.user.first_name %><br/>
+               <%= report_comment.comment %>
+              </td>
+              <td>
+               <% if report_comment.user == current_user %>
+                 <%= link_to "削除", report_report_comment_path(report_comment.report, report_comment), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+            　 <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
 </div>

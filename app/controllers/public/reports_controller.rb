@@ -15,7 +15,7 @@ class Public::ReportsController < ApplicationController
   end
 
   def index
-    @reports = Report.publiced.order(created_at: :desc)
+    @reports = Report.publiced.page(params[:page]).per(6).order(created_at: :desc)
     @tag_list = Tag.all
   end
 
@@ -27,11 +27,15 @@ class Public::ReportsController < ApplicationController
 
   def edit
     @report = Report.find(params[:id])
+    @report.name = @report.tags.pluck(:name).join(" ")
   end
 
   def update
     @report = Report.find(params[:id])
+    tag_list = params[:report][:name].split(nil)
     @report.update(report_params)
+    @report.save_tag(tag_list)
+    
     redirect_to report_path(@report.id)
   end
 
@@ -42,7 +46,9 @@ class Public::ReportsController < ApplicationController
   end
 
   def bookmark
-    @reports = Bookmark.where(user_id: current_user.id)
+    @bookmark = Report.find(Bookmark.group(:report_id).where(user_id: current_user.id).pluck(:report_id))
+    @reports = Kaminari.paginate_array(@bookmark).page(params[:page]).per(6)
+
   end
 
   def searchpage
@@ -50,9 +56,14 @@ class Public::ReportsController < ApplicationController
   end
 
   def rank
-    @today_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_day).order('count(report_id) desc').limit(6).pluck(:report_id))
-    @week_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_week).order('count(report_id) desc').limit(6).pluck(:report_id))
-    @month_ranks =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_month).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @today =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_day).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @today_ranks = Kaminari.paginate_array(@today).page(params[:page]).per(6)
+
+    @week =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_week).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @week_ranks = Kaminari.paginate_array(@week).page(params[:page]).per(6)
+
+    @month =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_month).order('count(report_id) desc').limit(6).pluck(:report_id))
+    @month_ranks = Kaminari.paginate_array(@month).page(params[:page]).per(6)
   end
 
 
