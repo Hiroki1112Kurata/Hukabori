@@ -3,9 +3,9 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.id == current_user.id
-      @reports = @user.reports.all.order(created_at: :desc)
+      @reports = @user.reports.page(params[:page]).per(6).order(created_at: :desc)
     else
-      @reports = @user.reports.publiced.order(created_at: :desc)
+      @reports = @user.reports.publiced.page(params[:page]).per(6).order(created_at: :desc)
     end
 
   end

@@ -31,13 +31,36 @@ td {
   color:black;
 }
 
-.img {
-
+.index-img {
   .image {
     height:100px;
   }
 }
 
+.show-img {
+  .image {
+    height:300px;
+  }
+}
+
 .flex-item {
   width:300px;
+}
+
+.paginate {
+  text-align: center;
+  margin:10px auto;
+
+  li {
+    a{
+      border: none;
+      color: #696969;
+    }
+  }
+
+  .active {
+    a {
+      border-radius: 5px;
+    }
+  }
 }

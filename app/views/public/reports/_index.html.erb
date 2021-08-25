@@ -5,7 +5,7 @@
   <div class="flex-item border ml-1 mt-1">
 
     <%= link_to report_path(report.id) do %>
-      <div class="img text-center">
+      <div class="index-img text-center">
         <%= attachment_image_tag report, :image, format: 'jpeg', fallback: "no_image.jpg" %>
       </div>
       <h4 class="text-dark"><%= report.title %></h4>
@@ -66,4 +66,12 @@
 
   </div>
   <% end %>
+
 </div>
+
+<div class="paginate">
+  <%= paginate reports %>
+</div>
+
+
+
