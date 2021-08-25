@@ -1,34 +1,54 @@
-<h1>部署一覧・追加</h1>
+<div class="container">
+  <h1>部署一覧・追加</h1>
 
-<div>
-  <%= form_with model: [:admin, @department], local:true do |f| %>
-   <div>
-     <label>部署名</label>
-   </div>
-   <div>
-     <%= f.text_field :name, placeholder: "部署名" %>
-   </div>
-   <div>
-     <%= f.submit '新規登録'%>
-   </div>
-   <% end %>
-</div>
+  <div class="row">
+    <div class="col-sm-4 offset-sm-4">
+    <%= form_with model: [:admin, @department], local:true do |f| %>
+      <table>
+        <thead>
+          <tr>
+            <th>追加</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= f.text_field :name, placeholder: "部署名" %>
+            </td>
+            <td>
+              <%= f.submit '新規登録'%>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th>部署名</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @departments.each do |department| %>
-      <tr>
-        <td><%= department.name %></td>
-        <td><%= link_to "編集する", edit_admin_department_path(department.id) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4 offset-sm-4">
+      <table class="table-bordered ">
+        <thead>
+          <tr>
+            <th>部署名</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @departments.each do |department| %>
+          <tr>
+            <td><%= department.name %></td>
+            <td>
+              <%= link_to edit_admin_department_path(department.id), class: "btn btn-success" do %>
+                <i class="fas fa-cog"></i>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
 </div>
