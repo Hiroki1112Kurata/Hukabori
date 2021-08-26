@@ -10,15 +10,18 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to admin_users_path
+    if @user.update(user_params)
+       redirect_to admin_users_path
+    else
+       render :edit
+    end
   end
-  
-  
+
+
   private
-  
+
   def user_params
     params.require(:user).permit(:profile_image, :department_id, :is_deleted)
   end
-  
+
 end

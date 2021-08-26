@@ -9,9 +9,12 @@ class Public::ReportsController < ApplicationController
     @report.user_id = current_user.id
     tag_list = params[:report][:name].split(nil)
     @report.admin_comment = "未確認"
-    @report.save
-    @report.save_tag(tag_list)
-    redirect_to report_path(@report)
+    if @report.save
+       @report.save_tag(tag_list)
+       redirect_to report_path(@report)
+    else
+       render :new
+    end
   end
 
   def index
@@ -33,10 +36,13 @@ class Public::ReportsController < ApplicationController
   def update
     @report = Report.find(params[:id])
     tag_list = params[:report][:name].split(nil)
-    @report.update(report_params)
-    @report.save_tag(tag_list)
+    if @report.update(report_params)
+       @report.save_tag(tag_list)
+       redirect_to report_path(@report.id)
+    else
+       render :edit
+    end
     
-    redirect_to report_path(@report.id)
   end
 
   def destroy

@@ -2,10 +2,14 @@ class Public::ReportCommentsController < ApplicationController
 
   def create
     @report = Report.find(params[:report_id])
-    @comment = current_user.report_comments.new(report_comment_params)
-    @comment.report_id = @report.id
-    @comment.save
-    redirect_to report_path(@report)
+    @report_comment = current_user.report_comments.new(report_comment_params)
+    @report_comment.report_id = @report.id
+    if @report_comment.save
+       redirect_to report_path(@report)
+    else
+      @report_tag = @report.tags
+       render 'public/reports/show'
+    end
   end
 
   def destroy

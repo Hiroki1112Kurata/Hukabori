@@ -6,13 +6,17 @@ class Report < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :tag_relationships, dependent: :destroy
   has_many :tags, through: :tag_relationships
-
   attr_accessor :name
   # tagテーブルのnameカラムを紐づける
-  
-  attachment :image
 
+  attachment :image
   enum status: { checking: 0, publiced: 1, privated: 2 }
+
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :learning, presence: true
+  validates :action, presence: true
+  validates :admin_comment, presence: true
 
 
   def favorited_by?(user)

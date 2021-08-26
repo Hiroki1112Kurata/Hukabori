@@ -6,8 +6,11 @@ class Admin::ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
-    @report.update(report_params)
-    redirect_to admin_root_path
+    if @report.update(report_params)
+       redirect_to admin_root_path
+    else
+       render :edit
+    end
   end
 
 

@@ -1,3 +1,5 @@
+<% render 'layouts/errors', obj: @report %>
+
 <div class="container">
   <h1>投稿編集</h1>
   <%= form_with model: @report, local:true do |f| %>
