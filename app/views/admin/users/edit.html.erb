@@ -1,13 +1,41 @@
-<h1>ユーザ編集</h1>
+<div class="container">
+  <h1>ユーザ編集</h1>
 
-<%= form_with model: [:admin, @user], local:true do |f| %>
-<p><%= @user.last_name + @user.first_name %></p>
-<div><%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "選択して下さい" %></div>
-<div>
-  <%= f.radio_button :is_deleted, :false %>
-  <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
-  <%= f.radio_button :is_deleted, :true %>
-  <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+  <%= form_with model: [:admin, @user], local:true do |f| %>
+  <div class="row">
+    <div class="col-sm-4 offset-sm-4">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>氏名</td>
+            <td><%= @user.last_name + @user.first_name %></td>
+          </tr>
+          <tr>
+            <td>所属部署</td>
+            <td>
+              <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "選択して下さい" %>
+            </td>
+          </tr>
+          <tr>
+            <td>ステータス</td>
+            <td>
+              <%= f.radio_button :is_deleted, :false %>
+              <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+              <%= f.radio_button :is_deleted, :true %>
+              <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <%= f.submit "変更を保存", class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <% end %>
+
 </div>
-<%= f.submit "変更を保存" %>
-<% end %>

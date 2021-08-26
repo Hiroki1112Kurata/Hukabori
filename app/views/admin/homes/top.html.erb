@@ -1,44 +1,43 @@
 <div class="container">
   <h1>投稿一覧</h1>
   <div class="row">
-    <div class="col-sm-11">
-      <table>
+      <table class="table table-hover">
         <thead>
           <tr></tr>
         </thead>
         <tbody>
         <% @reports.each do |report| %>
           <tr>
-            <td>
-              <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %>
+            <td class="col-sm-7">
+              <%= attachment_image_tag report.user, :profile_image, :fill, 40, 40, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "40x40", style: "border-radius:50%" %>
               <%= report.user.last_name + report.user.first_name %><br/>
               <%= report.title %>
             </td>
-            <td>
+
+            <td class="col-sm-2">
               <%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
             </td>
-            <td>
+            <td class="col-sm-1">
               <% if report.status == "checking" %>
-                <div class="border p-2" style="background-color: #e3f2fd;">
+                <div class="border p-2 text-center" style="background-color: #e3f2fd;">
                   未確認
                 </div>
               <% elsif report.status == "publiced" %>
-                <div class="border p-2">
+                <div class="border p-2 text-center">
                   閲覧可
                 </div>
               <% else %>
-                <div class="border p-2">
+                <div class="border p-2 text-center">
                   非公開
                 </div>
               <% end %>
             </td>
-            <td>
-              <%= link_to "編集", edit_admin_report_path(report.id) %>
+            <td class="col-sm-1">
+              <%= link_to "編集", edit_admin_report_path(report.id), class: "btn btn-success" %>
             </td>
           </tr>
         <% end %>
         </tbody>
       </table>
-    </div>
   </div>
 </div>
