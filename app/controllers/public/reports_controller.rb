@@ -11,6 +11,7 @@ class Public::ReportsController < ApplicationController
     @report.admin_comment = "未確認"
     if @report.save
        @report.save_tag(tag_list)
+       flash[:notice] = "successfully."
        redirect_to report_path(@report)
     else
        render :new
@@ -38,11 +39,12 @@ class Public::ReportsController < ApplicationController
     tag_list = params[:report][:name].split(nil)
     if @report.update(report_params)
        @report.save_tag(tag_list)
+       flash[:notice] = "successfully."
        redirect_to report_path(@report.id)
     else
        render :edit
     end
-    
+
   end
 
   def destroy

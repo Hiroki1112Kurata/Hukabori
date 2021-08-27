@@ -7,8 +7,12 @@ class Admin::DepartmentsController < ApplicationController
 
   def create
     @department = Department.new(department_params)
-    @department.save
-    redirect_to admin_departments_path
+    if @department.save
+       redirect_to admin_departments_path
+    else
+       @departments = Department.all
+       render :index
+    end
   end
 
   def edit
@@ -17,8 +21,11 @@ class Admin::DepartmentsController < ApplicationController
 
   def update
     @department = Department.find(params[:id])
-    @department.update(department_params)
-    redirect_to admin_departments_path
+    if @department.update(department_params)
+       redirect_to admin_departments_path
+    else
+       render :edit
+    end
   end
 
 

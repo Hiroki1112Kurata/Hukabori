@@ -7,12 +7,12 @@ class Admin::ReportsController < ApplicationController
   def update
     @report = Report.find(params[:id])
     if @report.update(report_params)
+       flash[:notice] = "successfully."
        redirect_to admin_root_path
     else
        render :edit
     end
   end
-
 
   private
 
