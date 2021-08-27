@@ -1,22 +1,88 @@
 <%= render 'layouts/errors', obj: @report %>
 
-<h1>投稿編集</h1>
-<%= form_with model: [:admin, @report], local:true do |f| %>
-<div>
-  <div><%= attachment_image_tag @report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></div>
+<div class="container">
+  <h1>投稿編集</h1>
+  <%= form_with model: [:admin, @report], local:true do |f| %>
+    <div class="row text-center">
+      <div class="col-sm-12 show-img">
+        <%= attachment_image_tag @report, :image, format: 'jpeg', fallback: "no_image.jpg" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2">
+        <h2><%= @report.title %></h2>
+        <div class="row justify-content-between">
 
-  <p>タイトル：<%= @report.title %></p>
-  <p>名前：<%= @report.user.first_name %></p>
-  <p>作業内容・成果：<%= @report.content %></p>
-  <p>考えたこと・学んだこと：<%= @report.learning %></p>
-  <p>今後実施すること：<%= @report.action %></p>
-  <p>管理者コメント：<%= @report.admin_comment %></p>
-  <h4>管理者コメント</h4>
-  <%= f.text_area :admin_comment %>
-  <div>
-    <%= f.select :status ,options_for_select([['未確認', :checking], ['閲覧可', :publiced], ['非公開', :privated]], selected: @report.status) %>
-  </div>
+          <div class="flex d-flex flex-row mb-1">
+            <i class="fas fa-tags"></i>
+              <% @report.tags.each do |tag_list| %>
+                <div id="tag_lists_<%= tag_list.id %>" class="mr-1 border" style="background-color: #e3f2fd;">
+                  <%= tag_list.name %>
+                </div>
+              <% end %>
 
-  <%= f.submit "変更を保存" %>
-<% end %>
+              <% if @report.status == "checking" %>
+                <div class="border" style="background-color: #e3f2fd;">
+                  <i class="fas fa-spinner"></i>未確認
+                </div>
+              <% elsif @report.status == "publiced" %>
+                <div></div>
+              <% else %>
+                <div class="border" style="background-color: #e3f2fd;">
+                  <i class="far fa-eye-slash"></i>非公開
+                </div>
+              <% end %>
+          </div>
+
+          <div class="flex d-flex flex-row justify-content-end">
+
+            <p class="mb-0">
+              <i class="fas fa-heart heart-red"></i><%= @report.favorites.count %></p>
+            </p>
+            <p class="mb-0">
+              <i class="far fa-bookmark"></i><%= @report.bookmarks.count %>
+            </p>
+            <p class="mb-0">
+              <i class="far fa-comment"></i><%= @report.report_comments.count %>
+            </p>
+          </div>
+        </div>
+          <div class="flex">
+            <%= attachment_image_tag @report.user, :profile_image, :fill, 30, 30, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "30x30", style: "border-radius:50%" %>
+            <%= @report.user.last_name %>
+            <%= @report.user.first_name %>
+          </div>
+
+          <div class="row border-bottom">
+            <h4>作業内容・成果</h4>
+          </div>
+            <%= simple_format(h(@report.content)) %>
+          <div class="row border-bottom">
+            <h4>考えたこと・学んだこと</h4>
+          </div>
+          <p><%= simple_format(h(@report.learning)) %></p>
+          <div class="row border-bottom">
+            <h4>今後実施すること</h4>
+          </div>
+          <p><%= simple_format(h(@report.action)) %></p>
+
+          <div class="row border-bottom">
+            <h4>管理者コメント</h4>
+          </div>
+          <%= f.text_area :admin_comment, autofocus: true, size: '10x10', class: 'form-control' %>
+          <div>
+            <%= f.select :status ,options_for_select([['未確認', :checking], ['閲覧可', :publiced], ['非公開', :privated]], selected: @report.status), {}, class: "form-control mt-2"  %>
+            <!--なぜか{}を入れるとbootstrapが反映される-->
+          </div>
+
+      </div>
+    </div>
+     <div class="row text-center mb-3">
+       <div class="col-sm-12">
+        <%= f.submit '変更を保存' ,class: 'btn btn-success col-sm-2'  %>
+       </div>
+     </div>
+
+
+  <% end %>
 </div>

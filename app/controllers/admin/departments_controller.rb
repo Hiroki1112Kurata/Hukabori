@@ -8,6 +8,7 @@ class Admin::DepartmentsController < ApplicationController
   def create
     @department = Department.new(department_params)
     if @department.save
+       flash[:notice] = "successfully."
        redirect_to admin_departments_path
     else
        @departments = Department.all
@@ -22,6 +23,7 @@ class Admin::DepartmentsController < ApplicationController
   def update
     @department = Department.find(params[:id])
     if @department.update(department_params)
+       flash[:notice] = "successfully."
        redirect_to admin_departments_path
     else
        render :edit
