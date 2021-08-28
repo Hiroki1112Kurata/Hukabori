@@ -42,6 +42,7 @@ class Public::ReportsController < ApplicationController
        flash[:notice] = "successfully."
        redirect_to report_path(@report.id)
     else
+    @report.name = @report.tags.pluck(:name).join(" ")
        render :edit
     end
 
@@ -67,13 +68,17 @@ class Public::ReportsController < ApplicationController
     @today =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_day).order('count(report_id) desc').limit(6).pluck(:report_id))
     @today_ranks = Kaminari.paginate_array(@today).page(params[:page]).per(6)
 
+  end
+
+  def weeksrank
     @week =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_week).order('count(report_id) desc').limit(6).pluck(:report_id))
     @week_ranks = Kaminari.paginate_array(@week).page(params[:page]).per(6)
+  end
 
+  def monthsrank
     @month =Report.find(Favorite.group(:report_id).where(created_at: Time.current.all_month).order('count(report_id) desc').limit(6).pluck(:report_id))
     @month_ranks = Kaminari.paginate_array(@month).page(params[:page]).per(6)
   end
-
 
   private
 

@@ -9,7 +9,12 @@ Rails.application.routes.draw do
 
     get "reports/bookmark" =>"reports#bookmark"
     get "reports/searchpage" =>"reports#searchpage"
+    
+    # 日間・週間・月間ランキング
     get "reports/rank" =>"reports#rank"
+    get "reports/weeksrank" =>"reports#weeksrank"
+    get "reports/monthsrank" =>"reports#monthsrank"
+    
     resources :reports do
       resource :favorites, only: [:create, :destroy]
       resource :bookmarks, only: [:create, :destroy]
