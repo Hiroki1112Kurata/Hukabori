@@ -1,5 +1,7 @@
 class Admin::ReportsController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def edit
     @report = Report.find(params[:id])
   end

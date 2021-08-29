@@ -1,5 +1,9 @@
 class Admin::UsersController < ApplicationController
 
+  before_action :authenticate_admin!
+
+  before_action :if_not_admin
+
   def index
     @users = User.all
   end
@@ -19,6 +23,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def if_not_admin
+    redirect_to root_path unless admin_signed_in?
+  end
 
   def user_params
     params.require(:user).permit(:profile_image, :department_id, :is_deleted)

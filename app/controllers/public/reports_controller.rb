@@ -1,5 +1,7 @@
 class Public::ReportsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @report = Report.new
   end
@@ -32,6 +34,10 @@ class Public::ReportsController < ApplicationController
   def edit
     @report = Report.find(params[:id])
     @report.name = @report.tags.pluck(:name).join(" ")
+    unless @report.user == current_user
+       flash[:notice] = "権限がありません。"
+       redirect_to user_path(current_user.id)
+    end
   end
 
   def update

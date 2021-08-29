@@ -1,5 +1,8 @@
 class Public::BookmarksController < ApplicationController
 
+  before_action :authenticate_user!
+
+
   def create
     @report = Report.find(params[:report_id])
     bookmark = current_user.bookmarks.new(report_id: @report.id)

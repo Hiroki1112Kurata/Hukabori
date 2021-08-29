@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
 
+ before_action :authenticate_user!
+
   def show
     @user = User.find(params[:id])
     if @user.id == current_user.id
@@ -12,6 +14,10 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    unless @user == current_user
+       flash[:notice] = "権限がありません。"
+       redirect_to user_path(current_user.id)
+    end
   end
 
   def update

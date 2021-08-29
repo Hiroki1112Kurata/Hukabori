@@ -1,4 +1,7 @@
 class Public::SearchesController < ApplicationController
+
+  before_action :authenticate_user!
+
   def search
     case params[:order_sort]
       # タグ検索

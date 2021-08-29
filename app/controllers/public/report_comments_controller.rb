@@ -1,5 +1,8 @@
 class Public::ReportCommentsController < ApplicationController
 
+  before_action :authenticate_user!
+
+
   def create
     @report = Report.find(params[:report_id])
     @report_comment = current_user.report_comments.new(report_comment_params)
