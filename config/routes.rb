@@ -7,14 +7,14 @@ Rails.application.routes.draw do
     get "homes/about" => "homes#about", as: "about"
     get "searches/search"
 
-    get "reports/bookmark" =>"reports#bookmark"
-    get "reports/searchpage" =>"reports#searchpage"
-    
+    get "reports/bookmark" => "reports#bookmark"
+    get "reports/searchpage" => "reports#searchpage"
+
     # 日間・週間・月間ランキング
-    get "reports/rank" =>"reports#rank"
-    get "reports/weeksrank" =>"reports#weeksrank"
-    get "reports/monthsrank" =>"reports#monthsrank"
-    
+    get "reports/rank" => "reports#rank"
+    get "reports/weeksrank" => "reports#weeksrank"
+    get "reports/monthsrank" => "reports#monthsrank"
+
     resources :reports do
       resource :favorites, only: [:create, :destroy]
       resource :bookmarks, only: [:create, :destroy]
@@ -22,19 +22,18 @@ Rails.application.routes.draw do
     end
 
     # お問い合わせ機能ここから
-      resources :contacts, only: [:new, :create]
-      post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
-      post 'contacts/back', to: 'contacts#back', as: 'back'
-      get 'done', to: 'contacts#done', as: 'done'
+    resources :contacts, only: [:new, :create]
+    post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+    post 'contacts/back', to: 'contacts#back', as: 'back'
+    get 'done', to: 'contacts#done', as: 'done'
     # お問い合わせ機能ここまで
 
     devise_for :users, :controllers => {
       :registrations => 'public/users/registrations',
-      :sessions => 'public/users/sessions'
+      :sessions => 'public/users/sessions',
     }
     resources :users, only: [:show, :edit, :update]
   end
-
 
   namespace :admin do
     resources :reports, only: [:edit, :update]

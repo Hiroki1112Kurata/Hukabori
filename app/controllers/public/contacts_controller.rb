@@ -1,5 +1,4 @@
 class Public::ContactsController < ApplicationController
-
   def new
     @contact = Contact.new
   end
@@ -31,11 +30,9 @@ class Public::ContactsController < ApplicationController
   def done
   end
 
-
   private
 
   def contact_params
     params.require(:contact).permit(:email, :name, :phone_number, :subject, :message)
   end
-
 end

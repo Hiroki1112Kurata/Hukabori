@@ -1,7 +1,5 @@
 class Public::FavoritesController < ApplicationController
-
   before_action :authenticate_user!
-
 
   def create
     @report = Report.find(params[:report_id])
@@ -14,5 +12,4 @@ class Public::FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(report_id: @report.id)
     favorite.destroy
   end
-
 end
