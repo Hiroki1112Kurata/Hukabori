@@ -24,6 +24,9 @@
           <% end %>
         </div>
       <br/>
+
+      <%= f.hidden_field :order_sort, :value => "1" %>
+
       <div class="col-sm-12 text-center">
         <%= f.submit :"検索" ,class: 'btn btn-success col-sm-2' %>
       </div>

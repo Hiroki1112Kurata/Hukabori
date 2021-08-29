@@ -1,77 +1,92 @@
 <!--render 'public/reports/index', reports: @???-->
 
-<div class="d-flex flex-wrap justify-content-center">
-  <% reports.each do |report| %>
-  <div class="flex-item border ml-1 mt-1">
-
-    <%= link_to report_path(report.id) do %>
-      <div class="index-img text-center">
-        <%= attachment_image_tag report, :image, format: 'jpeg', fallback: "no_image.jpg" %>
-      </div>
-      <h4 class="text-dark"><%= report.title %></h4>
-
-    <% end %>
-
-    <%= link_to user_path(report.user.id) do %>
-      <div class="user_info text-dark">
-        <%= attachment_image_tag report.user, :profile_image, :fill, 30, 30, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "30x30", style: "border-radius:50%" %>
-        <%= report.user.last_name %>
-        <%= report.user.first_name %>
-      </div>
-    <% end %>
-
-    <div class="d-flex flex-row mb-1">
-      <i class="fas fa-tags"></i>
-        <% report.tags.each do |tag_list| %>
-          <div id="tag_lists_<%= tag_list.id %>" class="mr-1 border" style="background-color: #e3f2fd;">
-            <%= tag_list.name %>
-          </div>
-        <% end %>
-
-             <% if report.status == "checking" %>
-          <div class="border" style="background-color: #e3f2fd;">
-            <i class="fas fa-spinner"></i>未確認
-          </div>
-        <% elsif report.status == "publiced" %>
-          <div></div>
-        <% else %>
-          <div class="border" style="background-color: #e3f2fd;">
-            <i class="far fa-eye-slash"></i>非公開
-          </div>
-        <% end %>
-    </div>
-
-
-    <div class="d-flex flex-row">
-      <div id="favorites_buttons_<%= report.id %>">
-        <%= render 'public/favorites/favorite', report: report %>
-      </div>
-
-      <div id="bookmarks_buttons_<%= report.id %>">
-        <%= render 'public/bookmarks/bookmark', report: report %>
-      </div>
+<div class="row">
+  <div class="d-flex flex-wrap justify-content-center col-sm-10 offset-sm-1">
+    <% reports.each do |report| %>
+    <div class="flex-item border ml-1 mt-1">
 
       <%= link_to report_path(report.id) do %>
-      <div id="comments_buttons_<%= report.id %>" class="text-dark">
-        <p class="mr-1">
-          <i class="far fa-comment"></i><%= report.report_comments.count %>
-        </p>
-      </div>
+        <div class="index-img text-center">
+          <%= attachment_image_tag report, :image, format: 'jpeg', fallback: "no_image.jpg" %>
+        </div>
+        <h4 class="text-dark"><%= report.title %></h4>
+
       <% end %>
+
+      <%= link_to user_path(report.user.id) do %>
+        <div class="user_info text-dark">
+          <%= attachment_image_tag report.user, :profile_image, :fill, 30, 30, format: 'jpeg', style: "border-radius:50%", fallback: "no_image.jpg", size: "30x30", style: "border-radius:50%" %>
+          <%= report.user.last_name %>
+          <%= report.user.first_name %>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-sm-1">
+        <i class="fas fa-tags"></i>
+
+        </div>
+        <div class="col-sm-10">
+      <div class="d-flex flex-wrap mb-1">
+          <% report.tags.each do |tag_list| %>
+            <div id="tag_lists_<%= tag_list.id %>" class="mr-1 mb-1 border" style="background-color: #e3f2fd; border-radius:10%">
+              <%= link_to searches_search_path(order_sort: "0", id: tag_list.id), class: "text-dark" do %>
+                <%= tag_list.name %>
+              <% end %>
+            </div>
+          <% end %>
+
+               <% if report.status == "checking" %>
+            <div class="border" style="background-color: #e3f2fd;  border-radius:10%">
+              <i class="fas fa-spinner"></i>未確認
+            </div>
+          <% elsif report.status == "publiced" %>
+            <div></div>
+          <% else %>
+            <div class="border" style="background-color: #e3f2fd;  border-radius:10%">
+              <i class="far fa-eye-slash"></i>非公開
+            </div>
+          <% end %>
+      </div>
+
+        </div>
+      </div>
+
+
+      <div class="d-flex flex-row">
+        <div id="favorites_buttons_<%= report.id %>">
+          <%= render 'public/favorites/favorite', report: report %>
+        </div>
+
+        <div id="bookmarks_buttons_<%= report.id %>">
+          <%= render 'public/bookmarks/bookmark', report: report %>
+        </div>
+
+        <%= link_to report_path(report.id) do %>
+        <div id="comments_buttons_<%= report.id %>" class="text-dark">
+          <p class="mr-1">
+            <i class="far fa-comment"></i><%= report.report_comments.count %>
+          </p>
+        </div>
+        <% end %>
+
+
+      </div>
+
 
 
     </div>
-
-
+    <% end %>
 
   </div>
-  <% end %>
 
 </div>
 
-<div class="paginate">
-  <%= paginate reports %>
-</div>
+    <div class="paginate d-flex justify-content-center">
+      <%= paginate reports %>
+    </div>
+
+
 
 
 

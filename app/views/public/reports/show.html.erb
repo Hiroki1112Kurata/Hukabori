@@ -19,8 +19,10 @@
         <div class="flex d-flex flex-row mb-1">
           <i class="fas fa-tags"></i>
             <% @report.tags.each do |tag_list| %>
-              <div id="tag_lists_<%= tag_list.id %>" class="mr-1 border" style="background-color: #e3f2fd;">
-                <%= tag_list.name %>
+              <div id="tag_lists_<%= tag_list.id %>" class="mr-1 border" style="background-color: #e3f2fd; border-radius:10%">
+                <%= link_to searches_search_path(order_sort: "0", id: tag_list.id), class: "text-dark" do %>
+                  <%= tag_list.name %>
+                <% end %>
               </div>
             <% end %>
 
