@@ -1,7 +1,5 @@
 class Public::BookmarksController < ApplicationController
-
   before_action :authenticate_user!
-
 
   def create
     @report = Report.find(params[:report_id])
@@ -14,5 +12,4 @@ class Public::BookmarksController < ApplicationController
     bookmark = current_user.bookmarks.find_by(report_id: @report.id)
     bookmark.destroy
   end
-
 end

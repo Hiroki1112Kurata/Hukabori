@@ -1,5 +1,4 @@
 class Admin::DepartmentsController < ApplicationController
-
   before_action :authenticate_admin!
 
   def index
@@ -10,11 +9,11 @@ class Admin::DepartmentsController < ApplicationController
   def create
     @department = Department.new(department_params)
     if @department.save
-       flash[:notice] = "successfully."
-       redirect_to admin_departments_path
+      flash[:notice] = "successfully."
+      redirect_to admin_departments_path
     else
-       @departments = Department.all
-       render :index
+      @departments = Department.all
+      render :index
     end
   end
 
@@ -25,18 +24,16 @@ class Admin::DepartmentsController < ApplicationController
   def update
     @department = Department.find(params[:id])
     if @department.update(department_params)
-       flash[:notice] = "successfully."
-       redirect_to admin_departments_path
+      flash[:notice] = "successfully."
+      redirect_to admin_departments_path
     else
-       render :edit
+      render :edit
     end
   end
-
 
   private
 
   def department_params
     params.require(:department).permit(:name)
   end
-
 end
