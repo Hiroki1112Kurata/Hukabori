@@ -21,7 +21,7 @@
       <% if user_signed_in? %>
         <%= form_with url:searches_search_path, method: :get, local:true do |f| %>
         <%= f.text_field 'search[value]', class: "form-control", placeholder: "投稿をキーワードで探す"%>
-
+        <%= f.hidden_field :order_sort, :value => "1" %>
         <% end %>
       <% end %>
       </div>
