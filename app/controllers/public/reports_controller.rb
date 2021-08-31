@@ -26,6 +26,13 @@ class Public::ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    unless @report.user == current_user
+      unless @report.status == "publiced"
+        flash[:notice] = "指定の記事は非公開です。"
+        redirect_to reports_path
+      end
+    end
+
     @report_tag = @report.tags
     @report_comment = ReportComment.new
   end

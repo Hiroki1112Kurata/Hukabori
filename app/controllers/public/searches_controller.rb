@@ -3,12 +3,12 @@ class Public::SearchesController < ApplicationController
 
   def search
     case params[:order_sort]
-      # タグ検索
+    # タグ検索
     when "0"
       @tag_list = Tag.find(params[:id])
       @datas = @tag_list.reports.publiced.page(params[:page]).per(6)
 
-      # 検索フォーム
+    # 検索フォーム
     when "1"
       @value = params["search"]["value"]
 
