@@ -10,6 +10,7 @@ class Public::ReportsController < ApplicationController
     @report.user_id = current_user.id
     tag_list = params[:report][:name].split(nil)
     @report.admin_comment = "未確認"
+    @report.score = Language.get_data(report_params[:learning])
     if @report.save
       @report.save_tag(tag_list)
       flash[:notice] = "successfully."
