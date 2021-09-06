@@ -18,6 +18,9 @@
               <%= attachment_image_tag report, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
             </td>
             <td class="col-sm-1">
+              <%= report.score %>pt
+            </td>
+            <td class="col-sm-1">
               <% if report.status == "checking" %>
                 <div class="border p-2 text-center" style="background-color: #e3f2fd;">
                   未確認
