@@ -11,6 +11,7 @@ class Public::ReportsController < ApplicationController
     tag_list = params[:report][:name].split(nil)
     @report.admin_comment = "未確認"
     @report.score = Language.get_data(report_params[:learning])
+    # 自然言語処理
     if @report.save
       @report.save_tag(tag_list)
       flash[:notice] = "successfully."
@@ -49,6 +50,8 @@ class Public::ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+    @report.score = Language.get_data(report_params[:learning])
+    # 自然言語処理
     tag_list = params[:report][:name].split(nil)
     if @report.update(report_params)
       @report.save_tag(tag_list)
