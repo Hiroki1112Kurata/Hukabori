@@ -14,7 +14,7 @@ class Public::ReportsController < ApplicationController
     # 自然言語処理
     if @report.save
       @report.save_tag(tag_list)
-      flash[:notice] = "successfully."
+      flash[:notice] = "投稿が完了しました。一般への公開は、管理者の確認完了後となります。"
       redirect_to report_path(@report)
     else
       render :new
